@@ -32,6 +32,7 @@ async function initExercise() {
 
 initExercise();
 
+//Select the form for either cardio or resistance
 function handleWorkoutTypeChange(event) {
   workoutType = event.target.value;
 
@@ -49,6 +50,8 @@ function handleWorkoutTypeChange(event) {
   validateInputs();
 }
 
+//Define which fields are mandatory and needs to be 
+//entered.
 function validateInputs() {
   let isValid = true;
 
