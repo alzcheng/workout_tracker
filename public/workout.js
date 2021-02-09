@@ -1,3 +1,5 @@
+//This function gets the last workout and if the workout is not empty
+//it places the last workout onto the workout summary
 async function initWorkout() {
   const lastWorkout = await API.getLastWorkout();
   console.log("Last workout:", lastWorkout);
