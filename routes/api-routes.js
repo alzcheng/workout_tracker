@@ -13,10 +13,13 @@ module.exports = (app) => {
     })
 
     app.get("/api/workouts/range", (req, res) => {
-        Workout.find({}).sort({ _id: -1 }).limit(7).then(workouts => {
-            console.log(workouts);
-            res.send(workouts);
-        })
+        Workout.aggregate().addFields({ totalDuration: { $sum: "$exercises.duration" } })
+            .sort({ _id: -1 })
+            .limit(7)
+            .then(workouts => {
+                console.log(workouts);
+                res.send(workouts);
+            });
     });
 
     //matching up with createWorkout
@@ -32,24 +35,17 @@ module.exports = (app) => {
 
     //Update a new workout
     app.put("/api/workouts/:id", (req, res) => {
-        console.log(req.params.id);
-        const updatedWorkout = {};
-        const exercise = {};
-        const myExercises = [];
-        exercise.type = req.body.type;
-        exercise.name = req.body.name;
-        exercise.duration = req.body.duration;
-        exercise.weight = req.body.weight;
-        exercise.reps = req.body.reps;
-        exercise.sets = req.body.sets;
-        myExercises.push(exercise);
-        updatedWorkout.date = Date.now();
-        updatedWorkout.exercises = myExercises;
 
-        console.log(updatedWorkout);
+        const newExercise = {};
+        newExercise.type = req.body.type;
+        newExercise.name = req.body.name;
+        newExercise.duration = req.body.duration;
+        newExercise.distance = req.body.distance;
+        newExercise.weight = req.body.weight;
+        newExercise.reps = req.body.reps;
+        newExercise.sets = req.body.sets;
 
-
-        Workout.updateOne({ _id: req.params.id }, updatedWorkout)
+        Workout.updateOne({ _id: req.params.id }, { $push: { exercises: newExercise } })
             .then(newWorkout => {
                 res.send(newWorkout);
             })
