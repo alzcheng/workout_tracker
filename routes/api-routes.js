@@ -26,17 +26,8 @@ module.exports = (app) => {
             //getting the last 7 entries
             .limit(7)
             .then(workouts => {
-                console.log(workouts);
                 res.send(workouts);
             });
-
-        // Workout.find({})
-        //     .sort({ _id: -1 })
-        //     .limit(7)
-        //     .then(workouts => {
-        //         console.log(workouts);
-        //         res.send(workouts);
-        //     });
     });
 
     //matching up with createWorkout
@@ -45,7 +36,6 @@ module.exports = (app) => {
         const workout = new Workout(body);
         Workout.create(body)
             .then(workout => {
-                console.log(workout);
                 res.send(workout);
             })
     })
