@@ -6,20 +6,37 @@ module.exports = (app) => {
 
     //Route for getting the last workout 
     app.get("/api/workouts", (req, res) => {
-        Workout.find({}).then(allworkouts => {
-            res.send(allworkouts);
-        })
+        //When getting the workouts, add the totalDuration field so that the 
+        //last entry has that field for the display. 
+
+        Workout.aggregate().addFields({ totalDuration: { $sum: "$exercises.duration" } })
+            .sort({ day: 1 })
+            .then(allWorkouts => {
+                res.send(allWorkouts);
+            })
+
 
     })
 
+    //Route for getting the latest 7 workouts
     app.get("/api/workouts/range", (req, res) => {
         Workout.aggregate().addFields({ totalDuration: { $sum: "$exercises.duration" } })
-            .sort({ _id: -1 })
+            //sort in descending order    
+            .sort({ day: -1 })
+            //getting the last 7 entries
             .limit(7)
             .then(workouts => {
                 console.log(workouts);
                 res.send(workouts);
             });
+
+        // Workout.find({})
+        //     .sort({ _id: -1 })
+        //     .limit(7)
+        //     .then(workouts => {
+        //         console.log(workouts);
+        //         res.send(workouts);
+        //     });
     });
 
     //matching up with createWorkout
