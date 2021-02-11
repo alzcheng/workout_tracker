@@ -12,6 +12,13 @@ module.exports = (app) => {
 
     })
 
+    app.get("/api/workouts/range", (req, res) => {
+        Workout.find({}).sort({ _id: -1 }).limit(7).then(workouts => {
+            console.log(workouts);
+            res.send(workouts);
+        })
+    });
+
     //matching up with createWorkout
     app.post("/api/workouts", async ({ body }, res) => {
         console.log("working in routes")
@@ -49,3 +56,4 @@ module.exports = (app) => {
     });
 
 };
+
