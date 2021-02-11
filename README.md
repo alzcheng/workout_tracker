@@ -7,6 +7,12 @@
   * [Test Instructions](##Test-Instructions)
   * [Questions](##Questions)
   
+  ## Screenshots of the Application
+
+![](./public/img/screenshot1.png)
+![](./public/img/screenshot2.png)
+![](./public/img/screenshot3.png)
+
   ## Description
   This is an application that allows you to add and store your workouts.  The application also has a dashboard that allows you to see the past 7 workouts that you have done.
 
@@ -14,7 +20,7 @@
   This project is deployed on Heroku.
 
   ## Usage Information
-  Open the app here.   You can click on Dashboard for the previous workouts.  You can also continue adding exercises to the last workout or adding a new workout for that day. 
+  Open the app [here](https://workout-tracker-05071.herokuapp.com/?id=6024caa86de7000015d91777). You can click on Dashboard for the previous workouts.  You can also continue adding exercises to the last workout or adding a new workout for that day. 
 
   ## Contribution Guidelines
   Contributions to this project should be according to [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](code_of_conduct.md). 
